@@ -1,0 +1,10 @@
+.header-wrapper {
+    background-color: red;
+    margin-bottom: 1%;
+    padding: 2%;
+    
+}
+
+.header-wrapper > p {
+    color: white;
+}

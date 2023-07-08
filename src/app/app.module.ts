@@ -5,6 +5,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgChartsModule} from 'ng2-charts'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +20,7 @@ import { FappFooterComponent } from './components/fapp-footer/fapp-footer.compon
     PlotBarplotComponent,
     DateRangePickerComponent,
     FappHeaderComponent,
-    FappFooterComponent
+    FappFooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +30,7 @@ import { FappFooterComponent } from './components/fapp-footer/fapp-footer.compon
     MatNativeDateModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
