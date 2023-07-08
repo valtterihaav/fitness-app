@@ -13,6 +13,7 @@ import { PlotBarplotComponent } from './components/plot-barplot/plot-barplot.com
 import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
 import { FappHeaderComponent } from './components/fapp-header/fapp-header.component';
 import { FappFooterComponent } from './components/fapp-footer/fapp-footer.component';
+import { PlotLineplotComponent } from './components/plot-lineplot/plot-lineplot.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FappFooterComponent } from './components/fapp-footer/fapp-footer.compon
     DateRangePickerComponent,
     FappHeaderComponent,
     FappFooterComponent,
+    PlotLineplotComponent,
   ],
   imports: [
     BrowserModule,

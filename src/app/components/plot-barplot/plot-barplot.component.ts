@@ -9,6 +9,12 @@ import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 export class PlotBarplotComponent {
   public barChartOptions: ChartOptions = {
     responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'My barplot title'
+      }
+    }
   };
   public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012']; // Mock labels
   public barChartType: ChartType = 'bar';
