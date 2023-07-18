@@ -15,8 +15,12 @@ export class ApiService {
  * 
  * @returns 
  */
-  getOverallData(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/get_overall_data`); // adjust with your FastAPI route
+  getOverallData(start_date: string | null, end_date: string | null): Observable<any> | null {
+    console.log("here");
+    if (start_date && end_date) {
+      return this.http.get(`${this.baseUrl}/get_overall_data?start_date=${(start_date)}&end_date=${(end_date)}`); // adjust with your FastAPI route
+    }
+    return null
   }
 
   /**
@@ -25,6 +29,7 @@ export class ApiService {
    * @returns - All data that the backend has access to i.e. all sports etc
    */
   getAllData(): Observable<any> {
+    
     return this.http.get(`${this.baseUrl}/get_all_data`); // adjust with your FastAPI route
   }
 
@@ -35,7 +40,7 @@ export class ApiService {
    * @returns - that specific sport information from the backend
    */
   getSpecificSportData(sport: string): Observable<any> {
-    const parameters_to_backend: string = "&sport_data_to_get=sport"
+    const parameters_to_backend: string = `&sport_data_to_get=${sport}`
     return this.http.get(`${this.baseUrl}/get_overall_data` + parameters_to_backend); // adjust with your FastAPI route
   }
 

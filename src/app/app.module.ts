@@ -6,6 +6,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgChartsModule} from 'ng2-charts'
+import { FormsModule } from '@angular/forms';
+import {NgFor} from '@angular/common';
+import {MatInputModule} from '@angular/material/input';
+import { DatePipe } from '@angular/common'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,8 +37,11 @@ import { PlotLineplotComponent } from './components/plot-lineplot/plot-lineplot.
     MatFormFieldModule,
     BrowserAnimationsModule,
     NgChartsModule,
+    FormsModule,
+    MatInputModule, 
+    NgFor
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
