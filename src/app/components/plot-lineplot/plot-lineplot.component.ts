@@ -21,7 +21,7 @@ export class PlotLineplotComponent {
   lineChartType: ChartType = 'line';
 
   // to be inputted to the component from the parent
-  @Input() lineChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012']; // Mock labels
+  @Input() lineChartLabels: string[] = [];
   @Input() lineChartLegend = true;
   @Input() lineChartData: ChartDataset[] = [];
 

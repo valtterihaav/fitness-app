@@ -3,11 +3,13 @@
 <div class="flex">
   <plot-lineplot 
     class="w-full m-14"
-    [lineChartData]="dataLineplot">
+    [lineChartData]="dataLineplot"
+    [lineChartLabels]="commonLabels">
   </plot-lineplot>
   <plot-barplot 
     class="w-full m-14"
-    [barChartData]="dataBarplot">
+    [barChartData]="dataBarplot"
+    [barChartLabels]="commonLabels">
   </plot-barplot>
 </div>
 <app-fapp-footer></app-fapp-footer>

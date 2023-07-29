@@ -21,7 +21,7 @@ export class PlotBarplotComponent {
   barChartType: ChartType = 'bar';
 
   // to be inputted to the component from the parent
-  @Input() barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012']; // Mock labels
+  @Input() barChartLabels: string[] = []; // Mock labels
   @Input() barChartLegend = true;
   @Input() barChartData: ChartDataset[] = [];
 
