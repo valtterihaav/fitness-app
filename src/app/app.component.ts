@@ -9,14 +9,10 @@ import { ChartDataset } from 'chart.js';
 export class AppComponent {
   dataLineplot: ChartDataset[] = [];
   dataBarplot: ChartDataset[] = [];
-  setData(data_backend: any) {
-    this.resetPlotDatas();
-    this.dataLineplot = Array(data_backend[0][0]);
-    this.dataBarplot = Array(data_backend[0][1]);
-  }
+  common_labels: string[] = [];
 
-  resetPlotDatas() {
-    this.dataLineplot.length = 0;
-    this.dataBarplot.length = 0;
+  setData(data_backend: any) {
+    this.dataLineplot = Array(data_backend["weight"]);
+    this.dataBarplot = Array(data_backend["all_sports"]);
   }
 }

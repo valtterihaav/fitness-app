@@ -33,7 +33,7 @@ export class DateRangePickerComponent implements OnInit
 
     // Set the start date to a week away from now
     const weekFromNow = new Date();
-    weekFromNow.setDate(weekFromNow.getDate() + 7);
+    weekFromNow.setDate(weekFromNow.getDate() - 7);
     this.startDate = weekFromNow;
 
     this.updatePlots();
@@ -46,12 +46,13 @@ export class DateRangePickerComponent implements OnInit
 
   async updatePlots() {
     this.formatDateStrings();
+    console.log(this.startDateFormatted, this.endDateFormatted)
     try {
       const response = await firstValueFrom(this.apiService.getOverallData(this.startDateFormatted, this.endDateFormatted) ?? of([]));
   
       if (response) {
-        const data_ready_for_plot = this.formatData(response);
-        this.dateChanged.emit(data_ready_for_plot);
+        console.log("data from backend", response);
+        this.dateChanged.emit(response);
       }
     } catch (error) {
       // Handle any errors that might occur during the API call or data processing
@@ -63,16 +64,6 @@ export class DateRangePickerComponent implements OnInit
     if (this.startDate && this.endDate) {
      this.updatePlots();
     }
-  }
-
-  formatData(data: any): any {
-    let data_to_plot: ChartDataset[] = [];
-    let names: string[] = [];
-    for (let key in data) {
-      data_to_plot.push(data[key]);
-      names.push(key);
-    }
-    return [data_to_plot, names];
   }
   
 }
