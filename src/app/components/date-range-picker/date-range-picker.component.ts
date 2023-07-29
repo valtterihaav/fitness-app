@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import  {MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ApiService } from 'src/app/services/api.service';
 import { DatePipe } from '@angular/common'
+import { ChartDataset } from 'chart.js';
+import { firstValueFrom, of } from 'rxjs';
 
 
 @Component({
@@ -14,26 +16,63 @@ import { DatePipe } from '@angular/common'
   // imports: [MatFormFieldModule, MatDatepickerModule, MatNativeDateModule],
 })
 
-export class DateRangePickerComponent {
+export class DateRangePickerComponent implements OnInit
+{
+  @Output() dateChanged = new EventEmitter();
   startDate: Date | null = new Date();
   endDate: Date | null = new Date();
+  startDateFormatted: string | null = null
+  endDateFormatted: string | null = null
 
   constructor(private apiService: ApiService, public datepipe: DatePipe) { }
 
-  onDateChange() {
+  
+  ngOnInit(): void {
+    // Set the starting (end) date to today
+    this.endDate = new Date(); // This sets the end date to today
 
-    console.log(this.startDate, this.endDate)
-    if (this.startDate && this.endDate) {
-      console.log(this.startDate, this.endDate);
-      let startDateString = this.datepipe.transform(this.startDate, 'yyyy-MM-dd');
-      let endDateString = this.datepipe.transform(this.endDate, 'yyyy-MM-dd');
-      console.log(startDateString, endDateString);
-      let response = this.apiService.getOverallData(startDateString, endDateString);
-      if (response)
-        response.subscribe(data => {
-          // Handle the fetched data
-          console.log(data);
-        });
+    // Set the start date to a week away from now
+    const weekFromNow = new Date();
+    weekFromNow.setDate(weekFromNow.getDate() + 7);
+    this.startDate = weekFromNow;
+
+    this.updatePlots();
+  }
+
+  formatDateStrings() {
+    this.startDateFormatted = this.datepipe.transform(this.startDate, 'yyyy-MM-dd');
+    this.endDateFormatted = this.datepipe.transform(this.endDate, 'yyyy-MM-dd');
+  }
+
+  async updatePlots() {
+    this.formatDateStrings();
+    try {
+      const response = await firstValueFrom(this.apiService.getOverallData(this.startDateFormatted, this.endDateFormatted) ?? of([]));
+  
+      if (response) {
+        const data_ready_for_plot = this.formatData(response);
+        this.dateChanged.emit(data_ready_for_plot);
+      }
+    } catch (error) {
+      // Handle any errors that might occur during the API call or data processing
+      console.error('Error updating plots:', error);
     }
   }
+
+  onDateChange() {
+    if (this.startDate && this.endDate) {
+     this.updatePlots();
+    }
+  }
+
+  formatData(data: any): any {
+    let data_to_plot: ChartDataset[] = [];
+    let names: string[] = [];
+    for (let key in data) {
+      data_to_plot.push(data[key]);
+      names.push(key);
+    }
+    return [data_to_plot, names];
+  }
+  
 }

@@ -1,10 +1,13 @@
 <app-fapp-header></app-fapp-header>
-<date-range-picker></date-range-picker>
+<date-range-picker (dateChanged)="setData($event)"></date-range-picker>
 <div class="flex">
   <plot-lineplot 
     class="w-full m-14"
-    [lineChartLegend]="false">
+    [lineChartData]="dataLineplot">
   </plot-lineplot>
-  <plot-barplot class="w-full m-14"></plot-barplot>
+  <plot-barplot 
+    class="w-full m-14"
+    [barChartData]="dataBarplot">
+  </plot-barplot>
 </div>
 <app-fapp-footer></app-fapp-footer>
