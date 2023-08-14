@@ -17,7 +17,7 @@ export class ApiService {
  */
   getOverallData(start_date: string | null, end_date: string | null): Observable<any> | null {
     if (start_date && end_date) {
-      return this.http.get(`${this.baseUrl}/get_overall_data?start_date=${(start_date)}&end_date=${(end_date)}`); // adjust with your FastAPI route
+      return this.http.get(`${this.baseUrl}/get_overall_data?start_date=${(btoa(start_date))}&end_date=${(btoa(end_date))}`); // adjust with your FastAPI route
     }
     return null
   }
